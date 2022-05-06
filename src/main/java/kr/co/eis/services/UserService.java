@@ -1,5 +1,13 @@
 package kr.co.eis.services;
 
+import kr.co.eis.domains.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
+import java.util.Optional;
+
 /**
  * packageName: kr.co.eis.services
  * fileName        : UserService
@@ -13,4 +21,16 @@ package kr.co.eis.services;
  */
 
 public interface UserService {
+
+    String login(User user);
+    List<User> findALl();
+    List<User> findAll(Sort sort);
+    Page<User> findAll(Pageable pageable);
+    long count();
+    String delete(User user);
+    String put(User user);
+    String save(User user);
+    Optional<User> findById(String userid);
+    boolean existsById(String userid);
+
 }

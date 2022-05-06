@@ -1,5 +1,7 @@
 package kr.co.eis.repositories;
 
+import kr.co.eis.domains.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +16,10 @@ import org.springframework.stereotype.Repository;
  * 2022-05-03         codejihyekim      최초 생성
  */
 
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-public interface UserRepository {
+    void put(User user);
+
+    String login(User user);
 }
