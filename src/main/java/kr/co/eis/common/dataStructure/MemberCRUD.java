@@ -142,6 +142,7 @@ public class MemberCRUD {
 
     static class MemberServiceImpl implements MemberService{
         private final Map<String, Member> map;
+
         MemberServiceImpl(){
             this.map = new HashMap<>();
         }

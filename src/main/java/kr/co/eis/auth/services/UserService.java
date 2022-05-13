@@ -32,5 +32,6 @@ public interface UserService {
     String save(User user);
     Optional<User> findById(String userid);
     boolean existsById(String userid);
-
+    //custom
+    List<User> findByUserName(String name);
 }
