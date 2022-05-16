@@ -1,8 +1,7 @@
 package kr.co.eis.common.streams;
 
 import kr.co.eis.common.dataStructure.AppleList;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -21,46 +20,40 @@ import java.util.stream.Collectors;
  */
 //한국어 안녕, 영어로 Hello
 public class HelloStream {
-    @Data
+    @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
+    @Getter
     public static class Hello{
         private String greeting, inLanguage;
 
-        public Hello(Builder builder){
-            this.greeting = builder.greeting;
-            this.inLanguage = builder.inLanguage;
-        }
-        @NoArgsConstructor
-        static public class Builder{
-            private String greeting, inLanguage;
-            public Builder greeting(String greeting){this.greeting=greeting; return this;}
-            public Builder inLanguage(String inLanguage){this.inLanguage=inLanguage; return this;}
-            public Hello build(){return new Hello(this);}
-        }
         @Override
         public String toString(){
-            return String.format("[인사 스펙] greeting: %s, inLanguage: %s",greeting,inLanguage);
+            return String.format("[인사] greeting: %s, inLanguage: %s",greeting,inLanguage);
         }
     }
 
     interface HelloService{
-        Set<String> greet(String[] arr);
+        Set<Hello> greet(List<Hello> arr);
     }
     static class HelloServiceImpl implements HelloService{
 
         @Override
-        public Set<String> greet(String[] arr) {
-            return Arrays.asList(arr)
+        public Set<Hello> greet(List<Hello> arr) {
+            return arr
                     .stream()
-                    .filter(e -> e.startsWith("영어"))
+                    .filter(e -> e.getInLanguage().equals("영어"))
                     .collect(Collectors.toSet());
         }
     }
-
     @Test
     void helloTest(){
-        String[] arr = {"한국어 안녕","영어 Hello"};
-        HelloService service = new HelloServiceImpl();
-        Set<String> s = service.greet(arr);
-        s.forEach(System.out::println);
+        List<Hello> arr = Arrays.asList(
+                Hello.builder().inLanguage("영어").greeting("Hello").build(),
+                Hello.builder().inLanguage("한국어").greeting("안녕").build()
+        );
+        new HelloServiceImpl()
+                .greet(arr)
+                .forEach(System.out::println);
     }
 }
