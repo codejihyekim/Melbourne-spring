@@ -1,7 +1,14 @@
 package kr.co.eis.common.algorithm;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Test;
+import org.springframework.cglib.core.internal.Function;
+
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 
 /**
  * packageName: kr.co.eis.common.step1
@@ -14,7 +21,6 @@ import java.util.Scanner;
  * ================================
  * 2022-05-09         codejihyekim      최초 생성
  */
-
 public class Q1_Gugudan {
 
     public static void main(String[] args) {
@@ -24,8 +30,6 @@ public class Q1_Gugudan {
                     "6숫자추론 7로또 8예약 9입출금 10구구단 \n" +
                     "11큰숫자게임 12야구");
             switch (scanner.next()){
-                case "1": calc(); break;
-                case "2": bmi(); break;
                 case "3": dice(); break;
                 case "4": rps(); break;
                 case "5": leap(); break;
@@ -40,13 +44,49 @@ public class Q1_Gugudan {
             }
         }
     } // main
-    static void calc(){
+    @Test void Q1_GugudanTest(){
+        Scanner s = new Scanner(System.in);
+        System.out.println("계산기");
+        System.out.println("+:"+ Calculator.Operator.PLUS.apply(7, 5));
+        System.out.println("-:"+ Calculator.Operator.MINUS.apply(7, 5));
+        System.out.println("*:"+ Calculator.Operator.MULTI.apply(7, 5));
+        System.out.println("/:"+ Calculator.Operator.DIVIDE.apply(7, 5));
+        System.out.println("BMI");
+        System.out.println("BMI: "+Bmi.BmiR.BMI.apply(160,56));
+        System.out.println("주사위");
+        System.out.println("가위바위보");
+        System.out.println("윤년");
+        System.out.println("숫자추론");
+        System.out.println("로또");
+        System.out.println("예약");
+        System.out.println("입출금");
+        System.out.println("구구단");
+        System.out.println("큰숫자게임");
+        System.out.println("야구");
+    }
+    static class Calculator{
+        @RequiredArgsConstructor enum Operator{
+            PLUS("+",(a, b) -> a+b),
+            MINUS("-",(a, b) -> a-b),
+            MULTI("*",(a, b) -> a*b),
+            DIVIDE("/",(a, b) -> a/b)
+            ;
+            private final String opcode;
+            private final BiFunction<Integer, Integer, Integer> f;
+            @Override public String toString() {return opcode;}
+            public int apply(int a, int b){return f.apply(a, b);}
+        }
+    }
+    static class Bmi{
+       @RequiredArgsConstructor enum BmiR{
+           BMI((a, b) -> b/(a*a)*10000)
+           ;
+           private final BiFunction<Double, Double, Double> f;
+           public Double apply(double height, double weight){return f.apply(height, weight);}
 
+       }
     }
 
-    static void bmi(){
-
-    }
     static void dice(){
         System.out.println("01 주사위");
         // 홀수나올때까지 주사위굴려 합하는 프로그래밍
@@ -132,6 +172,24 @@ public class Q1_Gugudan {
             s = "평년";
         System.out.println(String.format("%d는 %s입니다.", i, s));
     }
+    static class leap{
+        @RequiredArgsConstructor enum leapR{
+            //leapYear(a, (a) -> (a % 4 == 0 && a % 100 != 0) || a % 400 == 0))
+            ;
+            private final int a;
+            private final Function<Integer, Integer> f;
+
+            @Override
+            public String toString() {
+                return "leapR{" +
+                        "a=" + a +
+                        ", f=" + f +
+                        '}';
+            }
+            public int apply(int a){return f.apply(a);}
+        }
+    }
+
     static void guess(){
         System.out.println("05 숫자추론");
         Scanner scanner = new Scanner(System.in);
@@ -168,7 +226,6 @@ public class Q1_Gugudan {
             res += String.format(lotto[i] + " ");
         }
         System.out.println(res);
-
     }
     static void booking(Scanner scanner){
         System.out.println("07 예약");

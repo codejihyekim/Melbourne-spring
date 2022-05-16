@@ -1,4 +1,4 @@
-package kr.co.eis.common.lambda;
+package kr.co.eis.common.lambdas;
 
 /**
  * packageName: kr.co.eis.common.lambda

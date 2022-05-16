@@ -1,12 +1,6 @@
-package kr.co.eis.common.lambda;
-
-import javax.persistence.criteria.CriteriaBuilder;
-
-import static kr.co.eis.common.dataStructure.AppleList.Apple;
+package kr.co.eis.common.lambdas;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.function.*;
 
 

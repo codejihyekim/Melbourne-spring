@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.tuple.InMemoryValueGenerationStrategy;
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -95,6 +96,57 @@ public class MemberCRUD {
                 default: break;
             }
         }
+    }
+    @Test
+    void MemberTest(){
+        Scanner scanner = new Scanner(System.in);
+        MemberService service = new MemberServiceImpl();
+        System.out.println("### 1.save ###");
+        Member hong = new Member.Builder("hong")
+                .email("hong@test.com")
+                .password("1")
+                .name("홍길동")
+                .phone("010-0000-9999")
+                .profileImg("hong.jpg")
+                .build();
+        service.save(hong);
+        Member kim = new Member.Builder("kim")
+                .email("kim@test.com")
+                .password("2")
+                .name("김유신")
+                .phone("010-4785-9385")
+                .profileImg("kim.jpg")
+                .build();
+        service.save(kim);
+        Member you = new Member.Builder("you")
+                .email("hong@test.com")
+                .password("3")
+                .name("유관순")
+                .phone("010-0000-9999")
+                .profileImg("hong.jpg")
+                .build();
+        service.save(you);
+        System.out.println("### 2.count ###");
+        System.out.println(service.count());
+        System.out.println("### 3.findAll ###");
+        System.out.println(service.findAll());
+        System.out.println("### 4.findId ###");
+        System.out.println(service.findById("kim"));
+        /**
+        System.out.println("### 5.update");
+        Member m = new Member();
+        m.setUserid("kim");
+        service.update(m, new Member.Builder("park").email("park@test.com").password("4").name("박민근").phone("010-3975-9624").profileImg("park.jps").build());
+        System.out.println("### 4.findId ###");
+        System.out.println("수정된것 확인:"+service.findById("park"));*/
+        System.out.println("### 6.delete ###");
+        Member m = new Member();
+        m.setUserid("kim");
+        service.delete(m);
+        System.out.println("삭제후 카운트 감소확인:"+service.count());
+        System.out.println("### 7.clear ###");
+        service.clear();
+        System.out.println("clear 후 카운트 0 확인:" +service.count());
     }
 
     @Data @NoArgsConstructor
