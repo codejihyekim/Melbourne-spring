@@ -366,7 +366,6 @@ public class Q1_Gugudan {
                 }
             }
         }
-
     }
     static void gugudan(){
         System.out.println("09 구구단");
