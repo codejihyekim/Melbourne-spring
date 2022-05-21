@@ -1,35 +1,47 @@
 package kr.co.eis.board.domains;
 
-/**
- * packageName: kr.co.eis.domains
- * fileName        : Board
- * author          : codejihyekim
- * date            : 2022-05-04
- * desc            :
- * ================================
- * DATE              AUTHOR        NOTE
- * ================================
- * 2022-05-04         codejihyekim      최초 생성
- */
-
-import lombok.Data;
+import com.sun.istack.NotNull;
+import kr.co.eis.auth.domains.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-
-@Data
+/**
+ * packageName: kr.co.eis.auth.domains
+ * fileName        : Article
+ * author          : codejihyekim
+ * date            : 2022-05-18
+ * desc            :
+ * ================================
+ * DATE              AUTHOR        NOTE
+ * ================================
+ * 2022-05-18         codejihyekim      최초 생성
+ */
 @Component
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
-@Table(name="Articles")
+@Table(name="articles")
 
 public class Article {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false) private String project;
-    private String startDate;
-    private String status;
-    private String team;
-    private String progress;
-    private String actions;
+    @Id
+    @Column(name = "article_id")
+    @GeneratedValue private long articleId;
+    @Column @NotNull private String title;
+    @Column @NotNull private String content;
+    @Column(name = "written_date") @NotNull private String writtenDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
 }

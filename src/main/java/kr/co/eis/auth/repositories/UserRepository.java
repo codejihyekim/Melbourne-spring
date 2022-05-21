@@ -2,6 +2,8 @@ package kr.co.eis.auth.repositories;
 
 import kr.co.eis.auth.domains.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,10 +18,17 @@ import org.springframework.stereotype.Repository;
  * 2022-05-03         codejihyekim      최초 생성
  */
 
+interface UserCustromRepository{
+
+    // 000. 사용자의 비밀번호와 이메일을 수정하시오
+    @Query(value = "update user u set u.password=:password, u.email=:email where u.userId=:userId"
+            ,nativeQuery = true)
+    int update(@Param("password") String password, @Param("email") String email);
+    String login(User user);
+
+}
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    void put(User user);
-
-    String login(User user);
 }

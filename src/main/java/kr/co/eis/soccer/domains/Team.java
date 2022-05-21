@@ -1,13 +1,13 @@
 package kr.co.eis.soccer.domains;
 
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
-import lombok.Data;
+import com.sun.istack.NotNull;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * packageName: kr.co.eis.soccer.domains
@@ -21,24 +21,33 @@ import javax.persistence.Table;
  * 2022-05-09         codejihyekim      최초 생성
  */
 
+@Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Component
 @Entity
-@Data
-@Table(name="teams")
+@Table(name = "teams")
 public class Team {
-    @Id private Long id;
-    @Column(nullable = false) private String teamID;
+    @Id
+    @Column(name = "team_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) private long teamNo;
+    @Column(nullable = false) private String teamId;
+    @Column(nullable = false) private String stadiumId;
     private String regionName;
     private String teamName;
     private String eTeamName;
     private String origYyyy;
-    @Column(nullable = false)  String stadiumId;
     private String zipCode1;
     private String zipCode2;
     private String address;
     private String ddd;
     private String tel;
     private String fax;
-    private String homePage;
-    private String ownerName;
+    private String homepage;
+    private String owner;
+
+    @OneToMany(mappedBy = "team")
+    List<Player> players = new ArrayList<>();
+
 }

@@ -1,6 +1,5 @@
 package kr.co.eis.common.streams;
 
-import kr.co.eis.common.dataStructure.AppleList;
 import lombok.*;
 import org.junit.jupiter.api.Test;
 

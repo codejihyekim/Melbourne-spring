@@ -2,7 +2,6 @@ package kr.co.eis.auth.services;
 
 import kr.co.eis.auth.domains.User;
 import kr.co.eis.auth.repositories.UserRepository;
-import kr.co.eis.auth.services.UserService;
 import kr.co.eis.common.dataStructure.Box;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(User user) {
-        return repository.login(user);
+        return "";
     }
 
     @Override
@@ -43,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll(Sort sort) {
-        return repository.findAll();
+        return repository.findAll(sort);
     }
 
     @Override
@@ -63,15 +62,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String put(User user) {
-        repository.put(user);
-        return "";
-    }
-
-    @Override
     public String save(User user) {
         repository.save(user);
-        return null;
+        return "";
     }
 
     @Override
@@ -91,5 +84,9 @@ public class UserServiceImpl implements UserService {
         //ls = box.findByUserName(ls, name);
         //ls.stream().filter(...)
         return null;
+    }
+    @Override
+    public String update(User user) {
+        return "";
     }
 }

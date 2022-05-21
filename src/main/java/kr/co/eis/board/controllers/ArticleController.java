@@ -15,22 +15,19 @@ import java.util.Optional;
  * packageName: kr.co.eis.board.controllers
  * fileName        : ArticleController
  * author          : codejihyekim
- * date            : 2022-05-09
+ * date            : 2022-05-20
  * desc            :
  * ================================
  * DATE              AUTHOR        NOTE
  * ================================
- * 2022-05-09         codejihyekim      최초 생성
+ * 2022-05-20         codejihyekim      최초 생성
  */
-
-@RequestMapping("/article")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/article")
 public class ArticleController {
-
     private final ArticleService service;
 
-    // Embeded Methods
     @GetMapping("/findAll")
     public List<Article> findAll() {
         return service.findAll();
@@ -59,5 +56,15 @@ public class ArticleController {
     @PostMapping("/join")
     public String save(@RequestBody Article article) {
         return service.save(article);
+    }
+
+    @GetMapping("/findById/{article}")
+    public Optional<Article> findById(@PathVariable String article) {
+        return service.findById(article);
+    }
+
+    @GetMapping("/existsById/{article}")
+    public boolean existsById(@PathVariable String article) {
+        return service.existsById(article);
     }
 }

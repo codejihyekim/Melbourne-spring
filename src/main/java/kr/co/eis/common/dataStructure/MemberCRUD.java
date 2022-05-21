@@ -1,13 +1,8 @@
 package kr.co.eis.common.dataStructure;
 
-import kr.co.eis.board.domains.Board;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.tuple.InMemoryValueGenerationStrategy;
 import org.junit.jupiter.api.Test;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 

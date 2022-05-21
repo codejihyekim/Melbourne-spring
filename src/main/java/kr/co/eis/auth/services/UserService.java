@@ -28,10 +28,10 @@ public interface UserService {
     Page<User> findAll(Pageable pageable);
     long count();
     String delete(User user);
-    String put(User user);
     String save(User user);
     Optional<User> findById(String userid);
     boolean existsById(String userid);
     //custom
     List<User> findByUserName(String name);
+    String update(User user);
 }

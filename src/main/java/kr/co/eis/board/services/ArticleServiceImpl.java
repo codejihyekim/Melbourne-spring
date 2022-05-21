@@ -15,19 +15,18 @@ import java.util.Optional;
  * packageName: kr.co.eis.board.services
  * fileName        : ArticleServiceImpl
  * author          : codejihyekim
- * date            : 2022-05-09
+ * date            : 2022-05-20
  * desc            :
  * ================================
  * DATE              AUTHOR        NOTE
  * ================================
- * 2022-05-09         codejihyekim      최초 생성
+ * 2022-05-20         codejihyekim      최초 생성
  */
-
 @Service
 @RequiredArgsConstructor
-public class ArticleServiceImpl implements ArticleService{
-
+public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository repository;
+
 
     @Override
     public List<Article> findAll() {
@@ -59,5 +58,15 @@ public class ArticleServiceImpl implements ArticleService{
     public String save(Article article) {
         repository.save(article);
         return "";
+    }
+
+    @Override
+    public Optional<Article> findById(String article) {
+        return repository.findById(0L);
+    }
+
+    @Override
+    public boolean existsById(String article) {
+        return repository.existsById(0L);
     }
 }

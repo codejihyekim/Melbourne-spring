@@ -40,10 +40,6 @@ public class UserController {
     public String logout() {
         return "";
     }
-    @PutMapping("/put")
-    public String put(@RequestBody User user) {
-        return service.put(user);
-    }
 
     //Embeded Methods
     @GetMapping("/findAll")
@@ -86,4 +82,8 @@ public class UserController {
         return service.existsById(userid);
     }
 
+    @PutMapping("/update")
+    public String update(@RequestBody User user) {
+        return service.update(user);
+    }
 }

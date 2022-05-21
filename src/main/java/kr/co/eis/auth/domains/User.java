@@ -1,8 +1,8 @@
 package kr.co.eis.auth.domains;
 
 import com.sun.istack.NotNull;
+import kr.co.eis.board.domains.Article;
 import lombok.*;
-import org.springframework.data.repository.cdi.Eager;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Eager
+
 public class User {
     @Id
     @Column(name = "user_id")
