@@ -26,30 +26,50 @@ public class Gugudan {
     @AllArgsConstructor
     @Builder
     public static class Solution{
-        private int [][] arr;
+        private int num;
+        private String result;
 
         @Override
         public String toString() {
-            return String.format("",arr);
+            return result;
         }
     }
 
-    @FunctionalInterface interface ISolution{
-        void solution();
-    }
-    @Test
-    void test(){
-        ISolution is = () -> {
+    @FunctionalInterface interface ISolution{Solution solution(Solution s);}
+    @FunctionalInterface interface IMinseoGugudan{ void solution();}
+    @FunctionalInterface interface IJinyoungGugudan{ Solution solution(Solution s);}
+
+    static class Service{
+        static IMinseoGugudan iMinseo = () -> {
             for(int k = 2; k < 10; k+=4) {
                 for (int i = 1; i < 10; i++) {
                     for (int j = k; j < k+4; j++) {
                         System.out.print(j + "*" + i+ "=" +(j*i)+"\t");
                     }
-                    System.out.println();
+                    System.out.println("\n");
                 }
-                System.out.println();
+                System.out.println("\n");
             }
         };
-        is.solution();
+        static IJinyoungGugudan iJinyoung = e -> {
+            String result = "";
+            for(int k = 2; k <= e.getNum(); k+=4) {
+                for (int i = 1; i <= e.getNum(); i++) {
+                    for (int j = k; j < k+4; j++) {
+                        result +=  j + "*" + i+ "=" +(j*i)+"\t";
+                    }
+                    result += '\n';
+                }
+                result += '\n';
+            }
+            return Solution.builder().result(result).build();
+        };
+
     }
+    @Test
+    void test(){
+        //Service.iMinseo.solution();
+        System.out.println(Service.iJinyoung.solution(Solution.builder().num(19).build()));
+    }
+
 }

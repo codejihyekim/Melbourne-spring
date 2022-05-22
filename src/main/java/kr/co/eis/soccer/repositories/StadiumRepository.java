@@ -25,7 +25,6 @@ interface StadiumCustomRepository{
 
 }
 
-
 @Repository
 public interface StadiumRepository extends JpaRepository<Stadium, Long>, StadiumCustomRepository {
 }
