@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 
 /**
  * packageName: kr.co.eis.common.algorithm
@@ -19,6 +18,7 @@ import java.util.Arrays;
  * ================================
  * 2022-05-17         codejihyekim      최초 생성
  */
+
 public class Gugudan {
 
     @Getter
