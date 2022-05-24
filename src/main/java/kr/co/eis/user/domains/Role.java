@@ -1,4 +1,4 @@
-package kr.co.eis.auth.domains;
+package kr.co.eis.user.domains;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

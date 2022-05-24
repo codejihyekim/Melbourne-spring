@@ -1,6 +1,6 @@
-package kr.co.eis.auth.services;
+package kr.co.eis.user.services;
 
-import kr.co.eis.auth.domains.User;
+import kr.co.eis.user.domains.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

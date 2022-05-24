@@ -1,7 +1,7 @@
-package kr.co.eis.auth.services;
+package kr.co.eis.user.services;
 
-import kr.co.eis.auth.domains.User;
-import kr.co.eis.auth.repositories.UserRepository;
+import kr.co.eis.user.domains.User;
+import kr.co.eis.user.repositories.UserRepository;
 import kr.co.eis.common.dataStructure.Box;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,5 @@
 package kr.co.eis.soccer.services;
 
-import kr.co.eis.auth.domains.User;
 import kr.co.eis.soccer.domains.Player;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

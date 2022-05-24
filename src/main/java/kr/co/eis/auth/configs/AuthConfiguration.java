@@ -1,4 +1,4 @@
-package kr.co.eis.security.configs;
+package kr.co.eis.auth.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,7 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
  */
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class AuthConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()

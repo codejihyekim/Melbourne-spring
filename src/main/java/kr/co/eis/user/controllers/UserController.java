@@ -1,7 +1,7 @@
-package kr.co.eis.auth.controllers;
+package kr.co.eis.user.controllers;
 
-import kr.co.eis.auth.domains.User;
-import kr.co.eis.auth.services.UserService;
+import kr.co.eis.user.domains.User;
+import kr.co.eis.user.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
