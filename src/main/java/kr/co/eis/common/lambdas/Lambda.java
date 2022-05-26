@@ -30,6 +30,17 @@ public class Lambda {
         System.out.println(array(7).length);*/
         System.out.println(random(1, 6));
     }
+
+    public static long longParse(String s){
+        Function<String, Long> f = Long::parseLong;
+        return f.apply(s);
+    }
+
+    public static float floatParse(String s){
+        Function<String, Float> f = Float::parseFloat;
+        return f.apply(s);
+    }
+
     public static int integer(String arg){
         Function<String, Integer> f = Integer::parseInt;
         return f.apply(arg);

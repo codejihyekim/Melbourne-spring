@@ -19,7 +19,7 @@ import java.util.List;
  * ================================
  * 2022-05-03         codejihyekim      최초 생성
  */
-
+// DB쪽으로 보내는 컨테이너
 @Entity
 @Table(name="users")
 @Getter

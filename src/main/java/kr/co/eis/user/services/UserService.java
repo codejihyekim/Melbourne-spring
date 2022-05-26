@@ -1,6 +1,8 @@
 package kr.co.eis.user.services;
 
+import kr.co.eis.auth.domains.Messenger;
 import kr.co.eis.user.domains.User;
+import kr.co.eis.user.domains.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,16 +24,18 @@ import java.util.Optional;
 
 public interface UserService {
 
-    String login(User user);
+    UserDTO login(User user);
     List<User> findALl();
     List<User> findAll(Sort sort);
     Page<User> findAll(Pageable pageable);
-    long count();
-    String delete(User user);
-    String save(User user);
+    Messenger count();
+    Messenger delete(User user);
+    Messenger save(User user);
     Optional<User> findById(String userid);
-    boolean existsById(String userid);
+    Messenger existsById(String userid);
     //custom
     List<User> findByUserName(String name);
-    String update(User user);
+    Messenger update(User user);
+
+    Messenger logout();
 }

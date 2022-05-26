@@ -17,9 +17,9 @@ import java.util.List;
  * ================================
  * 2022-05-24         codejihyekim      최초 생성
  */
-
+ // DB에서 화면으로 보낼 때 쓰는 컨테이너
 @Component @Data
-public class UserDto {
+public class UserDTO {
     @ApiModelProperty(position =  1) private long userId;
     @ApiModelProperty(position =  2) String username;
     @ApiModelProperty(position =  3) String password;
