@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static kr.co.eis.common.lambdas.Lambda.longParse;
-import static kr.co.eis.common.lambdas.Lambda.string;
+import static kr.co.eis.common.lambdas.Lambda.*;
 
 /**
  * packageName: kr.co.eis.services
@@ -48,17 +47,23 @@ public class UserServiceImpl implements UserService{
     private final ModelMapper modelMapper;
 
     @Override
-    public UserDTO login(User user) {
+    public UserDTO login(UserDTO paramUser) {
         try {
-            UserDTO userDTO = modelMapper.map(user, UserDTO.class); // class로 옮겨담는다.
-            User findUser = repository.findByUsername(user.getUsername()).orElse(null);
-            String pw = repository.findByUsername(user.getUsername()).get().getPassword(); //들어온 이름으로 db에 있는 비번을 가져온다
-            boolean checkPassword = encoder.matches(user.getPassword(), pw); //들어온 비번과 db의 비번을 매치
-            String username = user.getUsername();
-            List<Role> roles = findUser.getRoles();
-            String token = checkPassword ? provider.createToken(username, roles) : "Wrong Password"; // 매치가 맞으면 이름과 역할을 보낸다.
-            userDTO.setToken(token);
-            return userDTO; //화면으로 보냄
+            UserDTO returnUser = new UserDTO();
+            String username = paramUser.getUsername();
+            User findUser = repository.findByUsername(username).orElse(null);
+            if(findUser != null){
+                boolean checkPassword = encoder.matches(paramUser.getPassword(), findUser.getPassword()); //들어온 비번과 db의 비번을 매치
+                if(checkPassword){
+                    returnUser = modelMapper.map(findUser, UserDTO.class);
+                    String token = provider.createToken(username, returnUser.getRoles());
+                    returnUser.setToken(token);
+                }else {
+                    String token = "FAILURE";
+                    returnUser.setToken(token);
+                }
+            }
+            return returnUser; //화면으로 보냄
         }catch (Exception e){
             throw new SecurityRuntimeException("유효하지 않은 아이디/비밀번호", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -91,12 +96,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Messenger save(User user) {
+    public Messenger save(UserDTO user) {
         String result = "";
         if(repository.findByUsername(user.getUsername()).isEmpty()) {
             List<Role> list = new ArrayList<>();
             list.add(Role.USER);
-            repository.save(User.builder().password(encoder.encode(user.getPassword()))
+            repository.save(User.builder()
+                    .regDate(user.getRegDate())
+                    .username(user.getUsername())
+                    .name(user.getName())
+                    .email(user.getEmail())
+                    .password(encoder.encode(user.getPassword()))
                     .roles(list).build());
             result = "SUCCESS";
         }else {

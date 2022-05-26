@@ -1,6 +1,11 @@
 package kr.co.eis.common.lambdas;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.function.*;
 
 /**
@@ -29,6 +34,16 @@ public class Lambda {
         System.out.println(equals("홍", "홍"));
         System.out.println(array(7).length);*/
         System.out.println(random(1, 6));
+    }
+
+    public static String date(){
+        Supplier<String> s = () -> string((LocalDate.now()));
+        return s.get();
+    }
+
+    public static String date1(){
+        Supplier<String> s = () -> new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+        return s.get();
     }
 
     public static long longParse(String s){
@@ -72,5 +87,10 @@ public class Lambda {
     public static File makeFile(String a){
         Function<String, File> f = File::new;
         return f.apply(a);
+    }
+    @Test
+    void test(){
+        //System.out.println(date());
+        System.out.println(date1());
     }
 }

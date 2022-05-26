@@ -24,13 +24,13 @@ import java.util.Optional;
 
 public interface UserService {
 
-    UserDTO login(User user);
+    UserDTO login(UserDTO user);
     List<User> findALl();
     List<User> findAll(Sort sort);
     Page<User> findAll(Pageable pageable);
     Messenger count();
     Messenger delete(User user);
-    Messenger save(User user);
+    Messenger save(UserDTO user);
     Optional<User> findById(String userid);
     Messenger existsById(String userid);
     //custom

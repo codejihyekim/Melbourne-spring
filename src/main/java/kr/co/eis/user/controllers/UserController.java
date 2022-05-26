@@ -6,6 +6,7 @@ import kr.co.eis.user.domains.User;
 import kr.co.eis.user.domains.UserDTO;
 import kr.co.eis.user.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -26,17 +27,24 @@ import java.util.Optional;
  * ================================
  * 2022-05-03         codejihyekim      최초 생성
  */
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-@Api(tags = "user")
-@RequiredArgsConstructor
-@RequestMapping("/user")
+@CrossOrigin(origins = "*", allowedHeaders = "*") //
+@Api(tags = "users")
 @RestController //@Component의 자식이다.
+@RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService service;
+    private final ModelMapper modelMapper;
+
 
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@RequestBody User user) {
+    @ApiOperation(value = "${UserController.login}")
+    @ApiResponses(value = {
+        @ApiResponse(code = 400, message = "Something Wrong"),
+        @ApiResponse(code = 422, message = "유효하지 않는 아이디 | 비밀번호")
+    })
+    public ResponseEntity<UserDTO> login(@ApiParam("Login User") @RequestBody UserDTO user) {
         return ResponseEntity.ok(service.login(user));
     }
 
@@ -79,7 +87,7 @@ public class UserController {
             @ApiResponse(code = 422, message = "중복된 ID")
     })
     public ResponseEntity<Messenger> save( @ApiParam("Join User") @RequestBody UserDTO user) {
-        System.out.println("회원가입 정보: ");
+        System.out.println("회원가입 정보: "+user.toString());
         return ResponseEntity.ok(service.save(user));
     }
 
