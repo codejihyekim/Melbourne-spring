@@ -42,10 +42,12 @@ public class PrimeNumber {
    }
    @Test
     void testSolution(){
-        /**
-       SolutionService pn = (x, y) -> {
-            List<Integer> primes =
 
+       /**SolutionService pn = (x, y) -> {
+            for(int i = x; i <= y; i++){
+                List<Integer> primes = Arrays.asList(x, y);
+            }
+            return Solution.builder().build();
        };
        System.out.println(pn.solution(1, 100));*/
     }
